@@ -1,0 +1,22 @@
+<button id="loginBtn">Unlock & Go</button>
+
+<script>
+  document.getElementById("loginBtn").addEventListener("click", async () => {
+    try {
+      const publicKey = {
+        challenge: new Uint8Array(32),
+        allowCredentials: [],
+        timeout: 60000,
+        userVerification: "required"
+      };
+      
+      const credential = await navigator.credentials.get({ publicKey });
+      
+      if (credential) {
+        window.location.href = "www.rtscompany.site"; // ফিঙ্গারপ্রিন্ট ঠিক হলে এই পেইজে যাবে
+      }
+    } catch (err) {
+      alert("Authentication failed: " + err);
+    }
+  });
+</script>
